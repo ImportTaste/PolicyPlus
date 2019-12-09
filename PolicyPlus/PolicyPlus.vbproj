@@ -83,6 +83,7 @@
     <Compile Include="AdmxFile.vb" />
     <Compile Include="AdmxStructures.vb" />
     <Compile Include="CmtxFile.vb" />
+    <Compile Include="CommandLineOptions.vb" />
     <Compile Include="CompiledStructures.vb" />
     <Compile Include="ConfigurationStorage.vb" />
     <Compile Include="DetailAdmx.Designer.vb">
