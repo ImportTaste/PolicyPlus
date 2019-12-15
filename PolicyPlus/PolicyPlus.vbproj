@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3E52E1E6-4FCF-403D-A84C-9C5CB0EDC739}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>Sub Main</StartupObject>
+    <StartupObject>PolicyPlus.Main</StartupObject>
     <RootNamespace>PolicyPlus</RootNamespace>
     <AssemblyName>Policy Plus</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -62,6 +62,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -323,7 +325,7 @@
     <Compile Include="PolicyStructures.vb" />
     <Compile Include="PresentationStructures.vb" />
     <Compile Include="Privilege.vb" />
-    <Compile Include="Program.vb" />
+    <Compile Include="FormsApplication.vb" />
     <Compile Include="RegFile.vb" />
     <Compile Include="SpolFile.vb" />
     <Compile Include="XmlExtensions.vb" />
