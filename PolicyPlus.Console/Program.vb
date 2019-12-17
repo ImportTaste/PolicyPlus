@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel
 Imports McMaster.Extensions.CommandLineUtils
+Imports PolicyPlus.Gui
 
 Public Module Program
     Function Main(args As String()) As Integer
@@ -8,30 +9,36 @@ Public Module Program
         app.FullName = "Policy Plus CLI"
         app.HelpOption("-h|--help")
 
-        'Dim commandLineOptions = New CommandLineOptions(parameters("input"), parameters("output"), parameters("policysection"))
+        app.Command("convertto", Sub(converttoCommand)
+            converttoCommand.Description = "Converts Group Policy files either to .reg or .pol."
 
-        app.Command("convertto", Sub(configCmd)
-            Dim format As CommandArgument = New CommandArgument With 
+            Dim format = New CommandArgument With 
                     {
                     .Description = "Format to convert to. Either reg or pol.", 
-                    .Name="<reg|pol>",
+                    .Name="reg|pol",
                     .MultipleValues = False
                     }
-            Dim input As CommandOption = New CommandOption("-i|--input", CommandOptionType.SingleValue) With{
+            Dim input = New CommandOption("-i|--input", CommandOptionType.SingleValue) With{
                     .Description = "Path to the input file."                                     
                     }
 
-            Dim output As CommandOption = New CommandOption("-o|--output", CommandOptionType.SingleValue) With{
+            Dim output = New CommandOption("-o|--output", CommandOptionType.SingleValue) With{
                     .Description = "Path to the output file."                                     
                     }
-            configCmd.Arguments.Add(format)
-            configCmd.Options.AddRange({input, output})
-            configCmd.HelpOption("-h|--help")
-            configCmd.OnExecute(Sub()
-                If (format Is Nothing Or Not input.HasValue() Or Not output.HasValue)
-                    configCmd.ShowHelp()
-                Else
 
+            Dim scope = New CommandOption("-s|--scope", CommandOptionType.SingleValue) With{
+                    .Description = "Scope (User|Machine) that is used when converting from pol to reg. Default is User."
+                    }
+
+            converttoCommand.Arguments.Add(format)
+            converttoCommand.Options.AddRange({input, output, scope})
+            converttoCommand.HelpOption("-h|--help")
+            converttoCommand.OnExecute(Sub()
+                If (format Is Nothing Or Not input.HasValue() Or Not output.HasValue)
+                    converttoCommand.ShowHelp()
+                Else
+                    Dim commandLineOptions = New CommandLineOptions(input.Value(), output.Value, scope.Value)
+                    commandLineOptions.ConvertTo(format.Value)
                 End If
             End Sub)
         End Sub)

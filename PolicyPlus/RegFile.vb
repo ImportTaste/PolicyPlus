@@ -42,6 +42,7 @@ Public Class RegFile
         Do ' Read all the keys
             Dim keyHeader = Reader.ReadLine
             If keyHeader = "" Then Exit Do
+            If keyHeader.Trim().StartsWith(";") Then Continue Do
             Dim keyName = keyHeader.Substring(1, keyHeader.Length - 2) ' Remove the brackets
             If keyName.StartsWith("-") Then
                 ' It's a deleter
@@ -53,6 +54,7 @@ Public Class RegFile
                 Do ' Read all the values
                     Dim valueLine = Reader.ReadLine
                     If valueLine = "" Then Exit Do
+                    If valueLine.Trim().StartsWith(";") Then Continue Do
                     Dim valueName As String = ""
                     Dim data As String
                     If valueLine.StartsWith("@") Then

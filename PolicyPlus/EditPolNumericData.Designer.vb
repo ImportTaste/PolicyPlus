@@ -26,7 +26,7 @@ Partial Class EditPolNumericData
         Dim Label2 As System.Windows.Forms.Label
         Me.TextName = New System.Windows.Forms.TextBox()
         Me.CheckHexadecimal = New System.Windows.Forms.CheckBox()
-        Me.NumData = New PolicyPlus.WideRangeNumericUpDown()
+        Me.NumData = New PolicyPlus.Gui.WideRangeNumericUpDown()
         Me.ButtonOK = New System.Windows.Forms.Button()
         Label1 = New System.Windows.Forms.Label()
         Label2 = New System.Windows.Forms.Label()
